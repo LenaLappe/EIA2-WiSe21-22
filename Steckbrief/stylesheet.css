@@ -1,0 +1,25 @@
+.body {
+	font-family: arial;
+	font-size: small;
+	background-color: aliceblue;
+}
+
+a {
+    background-color: white;
+    color: black;
+    border-radius: 18px;
+    border: 2px solid cornflowerblue;
+    text-decoration: none;
+    padding: 5px;
+}
+
+a:hover {
+    border: 2px solid rgb(22, 54, 150);
+    transition-duration: 0,4s;
+}
+
+a:active {
+    border: 2px solid cornflowerblue;
+    background-color: cornflowerblue;
+    color: black;
+}
