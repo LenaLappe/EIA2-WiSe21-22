@@ -2,19 +2,20 @@ namespace A01_RandomPoem {
 
          // Bearbeitet mit Liz und Kriss und Amélie
 
-    let subject: string[] = ["Harry", "Hermine", "Ron", "Snape", "Hagrid", "Dumbledore"];
-    let verb: string[] = ["braut", "liebt", "studiert", "schreit", "lacht", "zaubert"];
-    let object: string[] = ["Zaubertränke", "Hogwarts", "Dementoren", "den Grimm", "Lupin", "Dobby"];
+    let subjects: string[] = ["Harry", "Hermine", "Ron", "Snape", "Hagrid", "Dumbledore"];
+    let verbs: string[] = ["braut", "liebt", "studiert", "schreit", "lacht", "zaubert"];
+    let objects: string[] = ["Zaubertränke", "Hogwarts", "Dementoren", "den Grimm", "Lupin", "Dobby"];
 
     // console.log(subject);
     // console.log(verb);
     // console.log(object);
 
-    for (let i: number = subject.length; i > 0; i-- ) {
+    for (let i: number = subjects.length; i > 0; i-- ) {
         
-        getVerse(subject, verb, object);
+        let endVers: string = getVerse(subjects, verbs, objects);
         // console.log(i);
         // console.log(y);
+        console.log(endVers);
     }
 
     function getVerse(_subject: string[] , _verb: string[], _object: string[]): string {
@@ -27,7 +28,7 @@ namespace A01_RandomPoem {
 
         vers += _subject.splice(randomNumberS, 1)[0] + " " + _verb.splice(randomNumberV, 1)[0] + " " +  _object.splice(randomNumberO, 1);
 
-        console.log(vers);
+        
         // console.log(_subject.splice(randomNumberS));
 
         return("Alohomora");
