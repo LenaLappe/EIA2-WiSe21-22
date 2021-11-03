@@ -25,7 +25,8 @@ var A2_1_EventInspector;
         setInfoBox(_event);
     }
     function setInfoBox(_event) {
-        span.innerHTML = "x= " + _event.clientX + " & " + "y= " + _event.clientY;
+        span.innerHTML = "x= " + _event.clientX + " & " + "y= " + _event.clientY + "<br>";
+        span.innerHTML += "target: " + _event.target;
         span.style.left = (_event.clientX + 10) + "px";
         span.style.top = (_event.clientY + 15) + "px";
     }
@@ -37,9 +38,9 @@ var A2_1_EventInspector;
     }
     function logInfo(_event) {
         console.log("eventType" + _event.type);
-        console.log("target" + _event.target);
-        console.log("currentTarget" + _event.currentTarget);
-        console.log("wholeEvent" + _event);
+        console.log("target", _event.target);
+        console.log("currentTarget", _event.currentTarget);
+        console.log("wholeEvent", _event);
     }
 })(A2_1_EventInspector || (A2_1_EventInspector = {}));
 //# sourceMappingURL=exercise02.1.js.map

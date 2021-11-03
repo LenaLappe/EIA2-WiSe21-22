@@ -35,7 +35,8 @@ namespace A2_1_EventInspector {
     }
 
     function setInfoBox (_event: MouseEvent): void {
-        span.innerHTML = "x= " + _event.clientX + " & " + "y= " + _event.clientY;
+        span.innerHTML = "x= " + _event.clientX + " & " + "y= " + _event.clientY + "<br>";
+        span.innerHTML += "target: " + _event.target;
 
         span.style.left = (_event.clientX + 10) + "px";
         span.style.top = (_event.clientY + 15) + "px";
@@ -51,9 +52,9 @@ namespace A2_1_EventInspector {
 
     function logInfo (_event: Event): void {
         console.log("eventType" + _event.type);
-        console.log("target" + _event.target);
-        console.log("currentTarget" + _event.currentTarget);
-        console.log("wholeEvent" + _event);
+        console.log("target" , _event.target);
+        console.log("currentTarget" , _event.currentTarget);
+        console.log("wholeEvent" , _event);
         
     }
 }
