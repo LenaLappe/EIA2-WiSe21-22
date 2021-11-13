@@ -48,7 +48,7 @@ var A03_1_SequenzmemorySettings;
         document.body.appendChild(gameField);
         let timer = document.createElement("div");
         timer.classList.add("timer");
-        timer.innerHTML = timerStepper.toString();
+        timer.innerHTML = "Timer: " + timerStepper.toString();
         gameField.appendChild(timer);
         let selectedWord = globalFormData.get("selectedWord");
         console.log(selectedWord);
@@ -93,7 +93,7 @@ var A03_1_SequenzmemorySettings;
             }
             setInterval(function () {
                 timerStepper--;
-                timer.innerHTML = timerStepper.toString();
+                timer.innerHTML = "Timer: " + timerStepper.toString();
                 if (timerStepper == 0) {
                     finishGame(false);
                 }

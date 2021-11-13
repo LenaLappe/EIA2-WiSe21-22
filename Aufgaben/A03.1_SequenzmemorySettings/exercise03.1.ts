@@ -64,12 +64,11 @@ namespace A03_1_SequenzmemorySettings {
         document.body.setAttribute("style", "background-color:" + backgroundColor + ";");
 
         gameField.addEventListener("click", handleClickCard);
-       
         document.body.appendChild(gameField);
 
         let timer: HTMLDivElement = document.createElement("div");
         timer.classList.add("timer");
-        timer.innerHTML = timerStepper.toString();
+        timer.innerHTML = "Timer: " + timerStepper.toString();
         
         gameField.appendChild(timer);
 
@@ -134,7 +133,7 @@ namespace A03_1_SequenzmemorySettings {
             }
             setInterval(function(): void {
                 timerStepper--;
-                timer.innerHTML = timerStepper.toString();
+                timer.innerHTML = "Timer: " +  timerStepper.toString();
                 if (timerStepper == 0) {
                     finishGame(false);
                 }

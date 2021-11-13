@@ -5,4 +5,22 @@ span {
     margin: 5px 5px;
     display: inline-block;
     text-align: center;
+    margin-top: 200px;
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.field {
+    text-align: center;
+}
+
+.timer {
+    position: relative;
+    border-color: black;
+    border-style: groove;
+    border-radius: 7px;
+    font-size: 30px;
 }
