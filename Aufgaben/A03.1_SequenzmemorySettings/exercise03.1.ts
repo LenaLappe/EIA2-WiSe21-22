@@ -1,13 +1,13 @@
 namespace A03_1_SequenzmemorySettings {
 
-    let word: string;
+    // let word: string;
     let sequenz: string[];
-    let timer: HTMLSpanElement;
+    // let timer: HTMLSpanElement;
     let mixed: string[];
-    let letter: string;
+    // let letter: string;
     // let inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll("input");
     // let fieldsets: NodeListOf<HTMLFieldSetElement>;
-    let formElementSettings: HTMLFormElement;
+    // let formElementSettings: HTMLFormElement;
     let gameField: HTMLDivElement;
     let globalFormData: FormData;
     let gameCard: HTMLSpanElement;

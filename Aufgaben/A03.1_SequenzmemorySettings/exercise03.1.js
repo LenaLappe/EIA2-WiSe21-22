@@ -1,14 +1,14 @@
 "use strict";
 var A03_1_SequenzmemorySettings;
 (function (A03_1_SequenzmemorySettings) {
-    let word;
+    // let word: string;
     let sequenz;
-    let timer;
+    // let timer: HTMLSpanElement;
     let mixed;
-    let letter;
+    // let letter: string;
     // let inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll("input");
     // let fieldsets: NodeListOf<HTMLFieldSetElement>;
-    let formElementSettings;
+    // let formElementSettings: HTMLFormElement;
     let gameField;
     let globalFormData;
     let gameCard;
