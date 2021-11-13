@@ -1,9 +1,10 @@
+"use strict";
 var A2_1_EventInspector;
 (function (A2_1_EventInspector) {
-    var body;
-    var div0;
-    var div1;
-    var span;
+    let body;
+    let div0;
+    let div1;
+    let span;
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
         console.log(_event);

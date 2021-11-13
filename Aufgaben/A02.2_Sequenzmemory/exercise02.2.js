@@ -1,20 +1,21 @@
+"use strict";
 var A2_2_Sequenzmemory_Amélie;
 (function (A2_2_Sequenzmemory_Amélie) {
-    var gameOn = false;
-    var word;
-    var prepTime = 5;
-    var gameTime = 60;
-    var sequenz;
-    var timer;
-    var wrongFeedback;
-    var correctFeedback;
+    let gameOn = false;
+    let word;
+    let prepTime = 5;
+    let gameTime = 60;
+    let sequenz;
+    let timer;
+    let wrongFeedback;
+    let correctFeedback;
     window.addEventListener("load", prepareGame);
     function prepareGame(_event) {
         sequenz = prompt["enter a word"];
         createGameScreen();
     }
     function createGameScreen() {
-        var gameboard;
+        let gameboard;
         gameboard = document.createElement("div");
         document.createAttribute("id");
     }

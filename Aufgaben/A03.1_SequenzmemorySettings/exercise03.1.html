@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.03.1.css">
+    <script src="exercise03.1.js"></script>
+    <title>Sequenzmemory</title>
+</head>
+<body>
+    <h1>Sequenzmemory</h1>
+
+    <Form id="formElement">
+        <div id="form">
+
+            <fieldset>
+                <legend> Kartengröße</legend>
+                        <br>
+                        <input type="range" name="card" min="25px" max="70px" step="5px">
+            </fieldset>
+
+            <fieldset>
+                <legend>Farben</legend>
+                        <br>
+                        <label for="cardColor">Kartenfarbe</label>
+                        <input type="color" name="cardColor" id="cardColor" value="#f0abf0">
+
+                        <label for="backgroundColor">Hintergrundfarbe</label>
+                        <input type="color" name="backgroundColor" id="backgroundColor" value="#ffffff">
+
+                        <label for="fontColor">Schriftfarbe</label>
+                        <input type="color" name="fontColor" id="fontColor" value="#000000">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Fonts</legend>
+                        <br>
+                        <label for="arialFont">Arial</label>
+                        <input type="radio" name="Radiogroup" id="arialFont" value="Arial">
+
+                        <label for="timesFont">Times New Roman</label>
+                        <input type="radio" name="Radiogroup" id="timesFont" value="Times New Roman">
+
+                        <label for="calibriFont">Calibri</label>
+                        <input type="radio" name="Radiogroup" id="calibriFont" value="Calibri">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Zeitauswahl</legend>
+                        <br>
+                        <input type="number" name="stepper" id="timer" value="30" step="5" min="20" max="120" >
+                        <label for="timer">Sekunden</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Wort</legend> 
+                        <br>
+                        <input type="text" placeholder="Wählen Sie ein Wort" name="selectedWord" id="selectedWord">
+                </fieldset>
+
+                <br>
+
+            <button id="startButton">Start</button>
+            
+        </div>
+    </Form>
+    
+</body>
+</html>
