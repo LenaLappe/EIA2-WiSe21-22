@@ -58,7 +58,6 @@ namespace A08_1_generativeArt {
         crc2.strokeStyle =  "hsl(" + hue + "," + saturation + "% , " + lightness + "%" + ")";
         crc2.lineWidth = 3;
         crc2.stroke();
-
     }
 
     function drawCircle (_randomNumberX: number, _randomNumberY: number): void {
