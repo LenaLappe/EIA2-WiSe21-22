@@ -8,6 +8,7 @@ namespace A09_2_AutumnClasses {
 
         constructor(_size: number) {
             console.log("constructor Cloud");
+            this.size = _size;
         }
 
         move(_timeslice: number): void {

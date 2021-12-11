@@ -1,8 +1,11 @@
 namespace A09_2_AutumnClasses {
 
+    //Großteil aus meinem alten Code, aus Jirkas Videos und von Amélie
+
     window.addEventListener("load", handleLoad);
     let crc2: CanvasRenderingContext2D;
     let golden: number = 0.5;
+    let background: ImageData;
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -11,11 +14,11 @@ namespace A09_2_AutumnClasses {
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
-        let horizon: number = crc2.canvas.height * golden;
-
+        createPaths();
         drawBackground();
-        drawMountains(0, horizon, 50, 150, "grey", "lightgrey");
-        drawTrees(100, 110, -horizon);
+        background = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
+        window.setInterval(update, 50);
+
     }
 
     function drawBackground(): void {
@@ -30,6 +33,17 @@ namespace A09_2_AutumnClasses {
 
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+
+        let horizon: number = crc2.canvas.height * golden;
+
+        drawMountains(0, horizon, 50, 150, "grey", "lightgrey");
+        drawTrees(100, 110, -horizon);
+    }
+
+    function update(): void {
+        crc2.putImageData(background, 0, 0);
+        drawSquirrel();
+        drawLeaf();
     }
 
     function drawMountains(_x: number, _y: number, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
