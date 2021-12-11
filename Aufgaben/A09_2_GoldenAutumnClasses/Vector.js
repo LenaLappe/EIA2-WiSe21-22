@@ -4,6 +4,8 @@ var A09_2_AutumnClasses;
     class Vector {
         constructor(_x, _y) {
             console.log("constructor");
+            this.x = _x;
+            this.y = _y;
         }
         set(_x, _y) {
             console.log("set");

@@ -6,7 +6,8 @@ namespace A09_2_AutumnClasses {
 
         constructor(_x: number, _y: number) {
             console.log("constructor");
-            
+            this.x = _x;
+            this.y = _y;
         }
 
         set(_x: number, _y: number): void  {
