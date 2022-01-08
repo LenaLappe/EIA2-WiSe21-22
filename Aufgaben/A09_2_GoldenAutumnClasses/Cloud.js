@@ -4,6 +4,7 @@ var A09_2_AutumnClasses;
     class Cloud {
         constructor(_size) {
             console.log("constructor Cloud");
+            this.size = _size;
         }
         move(_timeslice) {
             console.log("move Cloud");

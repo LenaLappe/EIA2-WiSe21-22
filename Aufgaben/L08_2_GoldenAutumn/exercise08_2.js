@@ -100,7 +100,7 @@ var A08_2_GoldenAutumn;
     }
     function drawTree1(_position, _size) {
         console.log("Tree1");
-        let position = crc2.canvas.height * golden;
+        // let position = crc2.canvas.height * golden;
         for (let index = 0; index < 80; index++) {
             let randomNumberX = Math.floor(Math.random() * 800);
             let randomNumberY = Math.floor(Math.random() * 550);

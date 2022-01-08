@@ -11,10 +11,10 @@ namespace A2_1_EventInspector {
     function handleLoad(_event: Event): void {
         console.log(_event);
 
-        body = document.querySelector("body");
-        div0 = document.querySelector(".div0");
-        div1 = document.querySelector(".div1");
-        span = document.querySelector("span");
+        body = document.querySelector("body")!;
+        div0 = document.querySelector(".div0")!;
+        div1 = document.querySelector(".div1")!;
+        span = document.querySelector("span")!;
 
         document.addEventListener("mousemove", handleMouseMove);
 

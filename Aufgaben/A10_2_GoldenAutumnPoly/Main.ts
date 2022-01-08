@@ -1,4 +1,4 @@
-namespace A09_2_AutumnClasses {
+namespace A10_2_GoldenAutmnPoly {
 
     //Großteil aus meinem alten Code, aus Jirkas Videos und von Amélie
 
@@ -6,6 +6,15 @@ namespace A09_2_AutumnClasses {
     let crc2: CanvasRenderingContext2D;
     let golden: number = 0.5;
     let background: ImageData;
+    const drawables: Array<Drawable & Movable> = [
+        new Cloud(800),
+        new Squirrel(800, 300, 300),
+        new Squirrel(800, 300, 300),
+        new Squirrel(800, 300, 300),
+        new Leaf(800, 600),
+        new Leaf(800, 600),
+        new Leaf(800, 600)
+    ];
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -44,6 +53,14 @@ namespace A09_2_AutumnClasses {
 
     function update(): void {
         crc2.putImageData(background, 0, 0);
+
+
+
+        for (let drawable of drawables) {
+            drawable.move();
+            drawable.draw(crc2);
+        }
+
         // drawSquirrel();
         // drawLeaf();
     }

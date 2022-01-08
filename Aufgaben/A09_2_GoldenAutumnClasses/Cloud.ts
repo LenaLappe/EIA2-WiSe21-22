@@ -4,7 +4,6 @@ namespace A09_2_AutumnClasses {
         position: Vector;
         speed: Vector;
         size: number;
-        type: number;
 
         constructor(_size: number) {
             console.log("constructor Cloud");

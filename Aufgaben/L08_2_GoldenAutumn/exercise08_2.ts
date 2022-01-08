@@ -144,7 +144,7 @@ namespace A08_2_GoldenAutumn {
 
     function drawTree1( _position: Vector, _size: Vector): void {
         console.log("Tree1");
-        let position = crc2.canvas.height * golden;
+        // let position = crc2.canvas.height * golden;
             
         for (let index: number = 0; index < 80; index++) {
 

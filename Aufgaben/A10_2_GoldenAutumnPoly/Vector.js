@@ -1,6 +1,6 @@
 "use strict";
-var A09_2_AutumnClasses;
-(function (A09_2_AutumnClasses) {
+var A10_2_GoldenAutmnPoly;
+(function (A10_2_GoldenAutmnPoly) {
     class Vector {
         constructor(_x, _y) {
             console.log("constructor");
@@ -23,6 +23,6 @@ var A09_2_AutumnClasses;
             this.y += _addend.y;
         }
     }
-    A09_2_AutumnClasses.Vector = Vector;
-})(A09_2_AutumnClasses || (A09_2_AutumnClasses = {}));
+    A10_2_GoldenAutmnPoly.Vector = Vector;
+})(A10_2_GoldenAutmnPoly || (A10_2_GoldenAutmnPoly = {}));
 //# sourceMappingURL=Vector.js.map

@@ -1,28 +1,33 @@
-"use strict";
-var A09_2_AutumnClasses;
-(function (A09_2_AutumnClasses) {
-    class Vector {
-        constructor(_x, _y) {
+namespace A10_2_GoldenAutmnPoly {
+
+    export class Vector {
+        x: number;
+        y: number;
+
+        constructor(_x: number, _y: number) {
             console.log("constructor");
             this.x = _x;
             this.y = _y;
         }
-        set(_x, _y) {
+
+        set(_x: number, _y: number): void  {
             console.log("set");
             this.x = _x;
             this.y = _y;
+            
         }
-        scale(_factor) {
+
+        scale(_factor: number): void {
             console.log("scale");
             this.x *= _factor;
             this.y *= _factor;
         }
-        add(_addend) {
+
+        add(_addend: Vector): void {
             console.log("add");
             this.x += _addend.x;
             this.y += _addend.y;
         }
     }
-    A09_2_AutumnClasses.Vector = Vector;
-})(A09_2_AutumnClasses || (A09_2_AutumnClasses = {}));
-//# sourceMappingURL=Vector.js.map
+    
+}

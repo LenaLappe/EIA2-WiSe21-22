@@ -15,11 +15,11 @@ var A01_RandomPoem;
         console.log(endVers);
     }
     function getVerse(_subject, _verb, _object) {
-        let vers = "";
-        let randomNumberS = Math.floor(Math.random() * _subject.length);
-        let randomNumberV = Math.floor(Math.random() * _verb.length);
-        let randomNumberO = Math.floor(Math.random() * _object.length);
-        vers += _subject.splice(randomNumberS, 1)[0] + " " + _verb.splice(randomNumberV, 1)[0] + " " + _object.splice(randomNumberO, 1);
+        // let vers: string = "";
+        // let randomNumberS: number = Math.floor(Math.random() * _subject.length);
+        // let randomNumberV: number = Math.floor(Math.random() * _verb.length);
+        // let randomNumberO: number = Math.floor(Math.random() * _object.length);
+        // vers += _subject.splice(randomNumberS, 1)[0] + " " + _verb.splice(randomNumberV, 1)[0] + " " +  _object.splice(randomNumberO, 1);
         // console.log(_subject.splice(randomNumberS));
         return ("Alohomora");
     }
