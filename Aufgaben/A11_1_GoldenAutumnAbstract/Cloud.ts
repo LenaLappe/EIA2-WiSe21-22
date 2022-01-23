@@ -1,9 +1,11 @@
 namespace A11_1_GoldenAutmnAbstract {
 
     export class Cloud extends Drawable implements Movable {
+        static forward: boolean = true;
         speed: Vector;
         size: Vector;
         canvasWidth: number;
+        
 
         // beinhaltet die positionen der einzelne particel der wolke
         particlePositions: Vector[];
@@ -23,16 +25,30 @@ namespace A11_1_GoldenAutmnAbstract {
             }
         }
 
+        public static getDirection(): number {
+            return Cloud.forward ? 1 : -1;
+        }
+        public static getSpeed(): number {
+            return 5 * Cloud.getDirection();
+        }
+
+        public static getSpawn(): number {
+            return 150 * Cloud.getDirection();
+        }
+
         public draw(crc2: CanvasRenderingContext2D): void {
 
             this.drawCloud(crc2);
         }
 
         public move(): void {
-            this.position.x += 5;
+            let currentSpawn: number = Cloud.getSpawn();
+            this.position.x += Cloud.getSpeed();
 
-            if (this.position.x >= this.canvasWidth + 150) {
-                this.position.x = -150;
+            if (Cloud.forward && this.position.x >= this.canvasWidth + currentSpawn) {
+                this.position.x = -currentSpawn;
+            } else if (!Cloud.forward && this.position.x < currentSpawn) {
+                this.position.x = this.canvasWidth - currentSpawn;
             }
         }
 

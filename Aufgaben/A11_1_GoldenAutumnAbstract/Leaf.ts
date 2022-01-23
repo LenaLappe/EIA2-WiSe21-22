@@ -1,9 +1,12 @@
 namespace A11_1_GoldenAutmnAbstract {
 
     export class Leaf extends Drawable implements Movable {
+        static forward: boolean = true;
+        static baseSpeed: number = 2;
         size: number;
         canvasWidth: number;
         canvasHeight: number;
+
 
         constructor(_canvasWidth: number, _canvasHeight: number) {
             super();
@@ -14,18 +17,34 @@ namespace A11_1_GoldenAutmnAbstract {
             this.position = new Vector (x, y);
         }
 
+        public static getDirection(): number {
+            //if und If else Abfrage in einer Zeile
+            return Leaf.forward ? 1 : -1;
+        }
+
+        public static getXSpeed(): number {
+            return Leaf.baseSpeed * Leaf.getDirection();
+        }
+
+        public static getSpawn(): number {
+            return Cloud.getDirection();
+        }
+
         public move(): void {
             console.log("move leaf");
 
-            this.position.x += 2;
-            this.position.y += 3;
+            this.position.x += Leaf.getXSpeed();
+            this.position.y += Leaf.baseSpeed;
 
-            if (this.position.x >= this.canvasWidth) {
+            if (Leaf.forward && this.position.x >= this.canvasWidth) {
                 this.position.x = 0;
+            } else if (!Leaf.forward && this.position.x < 0) {
+                this.position.x = this.canvasWidth;
             }
+
             if (this.position.y >= this.canvasHeight) {
                 this.position.y = 0; 
-            }
+            } 
         }
 
         public draw(crc2: CanvasRenderingContext2D): void { 

@@ -15,13 +15,26 @@ var A11_1_GoldenAutmnAbstract;
                 this.particlePositions.push(new A11_1_GoldenAutmnAbstract.Vector(x, y));
             }
         }
+        static getDirection() {
+            return Cloud.forward ? 1 : -1;
+        }
+        static getSpeed() {
+            return 5 * Cloud.getDirection();
+        }
+        static getSpawn() {
+            return 150 * Cloud.getDirection();
+        }
         draw(crc2) {
             this.drawCloud(crc2);
         }
         move() {
-            this.position.x += 5;
-            if (this.position.x >= this.canvasWidth + 150) {
-                this.position.x = -150;
+            let currentSpawn = Cloud.getSpawn();
+            this.position.x += Cloud.getSpeed();
+            if (Cloud.forward && this.position.x >= this.canvasWidth + currentSpawn) {
+                this.position.x = -currentSpawn;
+            }
+            else if (!Cloud.forward && this.position.x < currentSpawn) {
+                this.position.x = this.canvasWidth - currentSpawn;
             }
         }
         drawCloud(crc2) {
@@ -45,6 +58,7 @@ var A11_1_GoldenAutmnAbstract;
             crc2.restore();
         }
     }
+    Cloud.forward = true;
     A11_1_GoldenAutmnAbstract.Cloud = Cloud;
 })(A11_1_GoldenAutmnAbstract || (A11_1_GoldenAutmnAbstract = {}));
 //# sourceMappingURL=Cloud.js.map

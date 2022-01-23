@@ -6,7 +6,8 @@ namespace A11_1_GoldenAutmnAbstract {
     let crc2: CanvasRenderingContext2D;
     let golden: number = 0.5;
     let background: ImageData;
-    let nut: Array<Drawable> = [new Acorn(800, 300, 300)];
+    let changeButton: HTMLButtonElement;
+    // let nut: Array<Drawable> = [new Acorn(800, 300, 300)];
     const drawables: Array<Drawable & Movable> = [
         new Cloud(800),
         new Squirrel(800, 300, 300),
@@ -20,6 +21,14 @@ namespace A11_1_GoldenAutmnAbstract {
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
 
+        changeButton = document.createElement("button");
+        changeButton.classList.add("buttonChange");
+        changeButton.innerHTML = "change direction of the wind";
+        changeButton.addEventListener("click", handleButton);
+
+        document.body.appendChild(changeButton);
+
+
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
@@ -30,6 +39,12 @@ namespace A11_1_GoldenAutmnAbstract {
         window.setInterval(update, 50);
         // window.addEventListener("click",);
 
+    }
+
+    function handleButton(): void {
+        Cloud.forward = !Cloud.forward;
+
+        Leaf.forward = !Leaf.forward;
     }
 
     function drawBackground(): void {

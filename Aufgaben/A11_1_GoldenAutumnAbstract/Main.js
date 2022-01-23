@@ -6,7 +6,8 @@ var A11_1_GoldenAutmnAbstract;
     let crc2;
     let golden = 0.5;
     let background;
-    let nut = [new A11_1_GoldenAutmnAbstract.Acorn(800, 300, 300)];
+    let changeButton;
+    // let nut: Array<Drawable> = [new Acorn(800, 300, 300)];
     const drawables = [
         new A11_1_GoldenAutmnAbstract.Cloud(800),
         new A11_1_GoldenAutmnAbstract.Squirrel(800, 300, 300),
@@ -18,6 +19,11 @@ var A11_1_GoldenAutmnAbstract;
     ];
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
+        changeButton = document.createElement("button");
+        changeButton.classList.add("buttonChange");
+        changeButton.innerHTML = "change direction of the wind";
+        changeButton.addEventListener("click", handleButton);
+        document.body.appendChild(changeButton);
         if (!canvas)
             return;
         crc2 = canvas.getContext("2d");
@@ -26,6 +32,10 @@ var A11_1_GoldenAutmnAbstract;
         background = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
         window.setInterval(update, 50);
         // window.addEventListener("click",);
+    }
+    function handleButton() {
+        A11_1_GoldenAutmnAbstract.Cloud.forward = !A11_1_GoldenAutmnAbstract.Cloud.forward;
+        A11_1_GoldenAutmnAbstract.Leaf.forward = !A11_1_GoldenAutmnAbstract.Leaf.forward;
     }
     function drawBackground() {
         console.log("Background");

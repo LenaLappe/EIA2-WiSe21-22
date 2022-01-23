@@ -10,12 +10,25 @@ var A11_1_GoldenAutmnAbstract;
             const y = Math.floor(Math.random() * _canvasHeight);
             this.position = new A11_1_GoldenAutmnAbstract.Vector(x, y);
         }
+        static getDirection() {
+            //if und If else Abfrage in einer Zeile
+            return Leaf.forward ? 1 : -1;
+        }
+        static getXSpeed() {
+            return Leaf.baseSpeed * Leaf.getDirection();
+        }
+        static getSpawn() {
+            return A11_1_GoldenAutmnAbstract.Cloud.getDirection();
+        }
         move() {
             console.log("move leaf");
-            this.position.x += 2;
-            this.position.y += 3;
-            if (this.position.x >= this.canvasWidth) {
+            this.position.x += Leaf.getXSpeed();
+            this.position.y += Leaf.baseSpeed;
+            if (Leaf.forward && this.position.x >= this.canvasWidth) {
                 this.position.x = 0;
+            }
+            else if (!Leaf.forward && this.position.x < 0) {
+                this.position.x = this.canvasWidth;
             }
             if (this.position.y >= this.canvasHeight) {
                 this.position.y = 0;
@@ -41,6 +54,8 @@ var A11_1_GoldenAutmnAbstract;
             crc2.restore();
         }
     }
+    Leaf.forward = true;
+    Leaf.baseSpeed = 2;
     A11_1_GoldenAutmnAbstract.Leaf = Leaf;
 })(A11_1_GoldenAutmnAbstract || (A11_1_GoldenAutmnAbstract = {}));
 //# sourceMappingURL=Leaf.js.map
