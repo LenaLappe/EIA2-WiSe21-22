@@ -1,0 +1,92 @@
+body {
+    margin: auto;
+    width: 1280px;
+    height: 800px;
+}
+
+.gameContainer {
+    position: absolute;
+    background-color: rgb(87, 47, 8);
+    left: 50%;
+    transform: translate(-50%, 50%);
+    bottom: 36%;
+    display: grid;
+    grid-template-columns: repeat(8, auto);
+    margin: 50px auto;
+    justify-content: space-between;
+}
+.field {
+    width: 80px;
+    height: 80px;
+    border: 3px solid rgb(116, 94, 68);
+    cursor: pointer;
+    line-height: 200px;
+}
+
+.tomatoBtn {
+    width: 50px;
+    height: 50px;
+    background-image: url(icons/tomato.png);
+    background-size: contain;
+    cursor: pointer;
+}
+
+.potatoBtn {
+    width: 50px;
+    height: 50px;
+    background-image: url(icons/potato.png);
+    background-size: contain;
+    cursor: pointer;
+}
+
+.lettuceBtn {
+    width: 50px;
+    height: 50px;
+    background-image: url(icons/lettuce.png);
+    background-size: contain;
+    cursor: pointer;
+}
+
+.carrotsBtn {
+    width: 50px;
+    height: 50px;
+    background-image: url(icons/carrot.png);
+    background-size: contain;
+    cursor: pointer;
+}
+
+.cucumberBtn {
+    width: 50px;
+    height: 50px;
+    background-image: url(icons/cucumber.png);
+    background-size: contain;
+    cursor: pointer;
+}
+
+.waterPlantBtn {
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    cursor: pointer;
+}
+
+.fertilizePlantBtn {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(113, 54, 54);
+    cursor: pointer;
+}
+
+.harvestPlantBtn {
+    width: 50px;
+    height: 50px;
+    background-color: darkgreen;
+    cursor: pointer;
+}
+
+.healPlantBtn {
+    width: 50px;
+    height: 50px;
+    background-color: darkorchid;
+    cursor: pointer;
+}
