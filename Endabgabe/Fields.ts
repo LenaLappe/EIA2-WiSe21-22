@@ -4,6 +4,7 @@ namespace Gemuesegarten {
 
         gameDiv: HTMLDivElement;
         recentVegetable: Vegetable|null;
+        infoContainer: HTMLDivElement;
 
         constructor(gameDivGiven: HTMLDivElement) {
             this.gameDiv = gameDivGiven;
@@ -12,6 +13,16 @@ namespace Gemuesegarten {
 
 
         onClick(): void {
+            // wird durch timeOut function aufgerufen (DOM), somit ist "this" nicht mehr das gleiche "this"
+            let self: Fields = this;
+
+            let plantActionButtons: HTMLDivElement = document.querySelector(".plantActionButtons")!;
+            let vegetableButtons: HTMLDivElement = document.querySelector(".vegetableButtons")!;
+
+            plantActionButtons.innerHTML = "";
+            vegetableButtons.innerHTML = "";
+
+
             if (this.recentVegetable == null) {
 
                 let tomatoButton: HTMLButtonElement;
@@ -19,27 +30,40 @@ namespace Gemuesegarten {
                 let lettuceButton: HTMLButtonElement;
                 let carrotsButton: HTMLButtonElement;
                 let cucumberButton: HTMLButtonElement;
-                let vegetableButtons: HTMLDivElement;
 
-                vegetableButtons = document.querySelector(".vegetableButtons")!;
+                let tomatoDiv: HTMLDivElement;
+                let potatoDiv: HTMLDivElement;
+                let lettuceDiv: HTMLDivElement;
+                let carrotsDiv: HTMLDivElement;
+                let cucumberDiv: HTMLDivElement;
+
+                
 
 
                 tomatoButton = document.createElement("button");
                 tomatoButton.classList.add("tomatoBtn");
-                console.log("Hallo, ich bin eine Tomate");
+                tomatoDiv = document.createElement("div");
+                tomatoDiv.innerHTML = Tomato.informationInstance.getPlantPrice() + " €";
         
                 potatoButton = document.createElement("button");
                 potatoButton.classList.add("potatoBtn");
+                potatoDiv = document.createElement("div");
+                potatoDiv.innerHTML = Potato.informationInstance.getPlantPrice() + " €";
         
                 lettuceButton = document.createElement("button");
                 lettuceButton.classList.add("lettuceBtn");
+                lettuceDiv = document.createElement("div");
+                lettuceDiv.innerHTML = Lettuce.informationInstance.getPlantPrice() + " €";
         
                 carrotsButton = document.createElement("button");
                 carrotsButton.classList.add("carrotsBtn");
+                carrotsDiv = document.createElement("div");
+                carrotsDiv.innerHTML = Carrots.informationInstance.getPlantPrice() + " €";
         
                 cucumberButton = document.createElement("button");
                 cucumberButton.classList.add("cucumberBtn");
-                console.log("Hallo, ich bin eine Gurke");
+                cucumberDiv = document.createElement("div");
+                cucumberDiv.innerHTML = Cucumber.informationInstance.getPlantPrice() + " €";
         
                 vegetableButtons.appendChild(tomatoButton);
                 vegetableButtons.appendChild(potatoButton);
@@ -47,27 +71,36 @@ namespace Gemuesegarten {
                 vegetableButtons.appendChild(carrotsButton);
                 vegetableButtons.appendChild(cucumberButton);
 
-                // Referenz auf sich selbst, da wir auf eine function in einer functiom aufrufen und this. somit nicht mehr gefunden werde kann
-                let self: Fields = this;
+                tomatoButton.appendChild(tomatoDiv);
+                potatoButton.appendChild(potatoDiv);
+                lettuceButton.appendChild(lettuceDiv);
+                carrotsButton.appendChild(carrotsDiv);
+                cucumberButton.appendChild(cucumberDiv);
+
 
                 tomatoButton.addEventListener("click", function (): void { 
                     self.recentVegetable = new Tomato(self);
+                    self.recentVegetable.plantSeedlings();
                     self.buttonRefreshUI();
                  });
                 potatoButton.addEventListener("click", function (): void {
                     self.recentVegetable = new Potato(self);
+                    self.recentVegetable.plantSeedlings();
                     self.buttonRefreshUI(); 
                 });
                 lettuceButton.addEventListener("click", function (): void { 
                     self.recentVegetable = new Lettuce(self);
+                    self.recentVegetable.plantSeedlings();
                     self.buttonRefreshUI(); 
                 });
                 carrotsButton.addEventListener("click", function (): void { 
                     self.recentVegetable = new Carrots(self);
+                    self.recentVegetable.plantSeedlings();
                     self.buttonRefreshUI(); 
                 });
                 cucumberButton.addEventListener("click", function (): void { 
                     self.recentVegetable = new Cucumber(self);
+                    self.recentVegetable.plantSeedlings();
                     console.log("schon wieder ne Gurke");
                     self.buttonRefreshUI(); 
                 });
@@ -80,31 +113,46 @@ namespace Gemuesegarten {
                 let fertilizePlantButton: HTMLButtonElement;
                 let harvestPlantButton: HTMLButtonElement;
                 let healPlantButton: HTMLButtonElement;
-                let plantActionButtons: HTMLDivElement = document.querySelector(".plantActionButtons")!;
+                
 
                 waterPlantButton = document.createElement("button");
                 waterPlantButton.classList.add("waterPlantBtn");
-                waterPlantButton.innerHTML = "water";
+                waterPlantButton.innerHTML = "water: 0 €" ;
 
                 fertilizePlantButton = document.createElement("button");
                 fertilizePlantButton.classList.add("fertilizePlantBtn");
-                fertilizePlantButton.innerHTML = "fertilize";
+                fertilizePlantButton.innerHTML = "fertilize: " + this.recentVegetable.getFertilizePrice() + " €";
 
-                harvestPlantButton = document.createElement("button");
-                harvestPlantButton.classList.add("harvestPlantBtn");
-                harvestPlantButton.innerHTML = "harvest";
+                if (this.recentVegetable!.status == Status.Plant) {
+                    harvestPlantButton = document.createElement("button");
+                    harvestPlantButton.classList.add("harvestPlantBtn");
+                    harvestPlantButton.innerHTML = "harvest: " + this.recentVegetable.getIncome() + " €";
 
-                healPlantButton = document.createElement("button");
-                healPlantButton.classList.add("healPlantBtn");
-                healPlantButton.innerHTML = "heal";
+                    plantActionButtons.appendChild(harvestPlantButton);
+
+                    harvestPlantButton.addEventListener("click", function (): void { 
+                        self.recentVegetable!.handleHarvest();
+                        self.buttonRefreshUI();
+                    });
+                }
+
+                else if (this.recentVegetable!.hasBug) {
+                    healPlantButton = document.createElement("button");
+                    healPlantButton.classList.add("healPlantBtn");
+                    healPlantButton.innerHTML = "heal: " + this.recentVegetable.getHealPrice() + " €";
+
+                    plantActionButtons.appendChild(healPlantButton);
+
+                    healPlantButton.addEventListener("click", function (): void { 
+                        self.recentVegetable!.handleHeal();
+                        self.buttonRefreshUI();
+                     });
+                }
 
                 plantActionButtons.appendChild(waterPlantButton);
                 plantActionButtons.appendChild(fertilizePlantButton);
-                plantActionButtons.appendChild(harvestPlantButton);
-                plantActionButtons.appendChild(healPlantButton);
 
 
-                let self: Fields = this;
 
                 waterPlantButton.addEventListener("click", function (): void { 
                     self.recentVegetable!.handleWater();
@@ -116,19 +164,21 @@ namespace Gemuesegarten {
                     self.buttonRefreshUI();
                  }); 
 
-                harvestPlantButton.addEventListener("click", function (): void { 
-                    self.recentVegetable!.handleHarvest();
-                    self.buttonRefreshUI();
-                 });
-
-                healPlantButton.addEventListener("click", function (): void { 
-                    
-                    self.buttonRefreshUI();
-                 });
-
-                
             }
         }
+
+        // vegetableCharacteristics(recentVegetable: Vegetable): void {
+        //     this.infoContainer = document.querySelector(".infoOfVegetables")!;
+    
+        //     let characteristics: string = "";
+        //     characteristics += "<img src=\"" + recentVegetable.growthStatus2  + ".png" + ">";
+        //     characteristics += "<br>";
+        //     characteristics += "Need of water: " + recentVegetable.neededWater;
+        //     characteristics += "<br>";
+        //     characteristics += "Fertilize: " + recentVegetable.neededFertilize;
+    
+        //     this.infoContainer.innerHTML = characteristics;
+        // }
 
 
         buttonRefreshUI(): void {
@@ -156,7 +206,11 @@ namespace Gemuesegarten {
 
             if (this.recentVegetable != null) {
 
-                if (this.recentVegetable!.status == Status.Plant) {
+                if (this.recentVegetable!.hasBug) {
+                    this.gameDiv.style.backgroundImage = "url(icons/" + this.recentVegetable!.bugStatus + ".png)";
+                    this.gameDiv.style.backgroundSize = "cover";
+                }
+                else if (this.recentVegetable!.status == Status.Plant) {
                     this.gameDiv.style.backgroundImage =  "url(icons/" + this.recentVegetable!.growthStatus2 + ".png)";
                     this.gameDiv.style.backgroundSize = "cover";
                 }
@@ -166,8 +220,20 @@ namespace Gemuesegarten {
                 }
                 else {
                     this.gameDiv.style.backgroundImage = "url(icons/" + this.recentVegetable!.damageStatus + ".png)";
+                    this.gameDiv.style.backgroundSize = "cover";
                 }
+
+
+                
+                
+                this.gameDiv.title = this.recentVegetable.growthStatus2 + ": " + "needed water: " + this.recentVegetable.water + " / " + this.recentVegetable.neededWater + "  & " +  " needed fertilize: " + this.recentVegetable.fertilize + " / " + this.recentVegetable.neededFertilize;
+
             }
+
+            else {
+                this.gameDiv.title = "";
+            }
+
         }
 
     }

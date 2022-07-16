@@ -1,18 +1,19 @@
 namespace Gemuesegarten {
 
     export class Tomato extends Vegetable {
-        constructor(_uiField: Fields) {
+        static informationInstance: Tomato = new Tomato(null);
+
+        constructor(_uiField: Fields | null) {
             super(_uiField,
                   "tomato",
-                  10000,
-                  0.3,
+                  50000,
+                  2,
                   7,
-                  0.1,
-                  1,
-                  10,
-                  10,
-                  10,
-                  10
+                  3,
+                  4,
+                  13,
+                //   10,
+                  5
             );
         }
 
@@ -20,8 +21,5 @@ namespace Gemuesegarten {
 
         alert("on click Tomato");
         }
-
-
-
     }
 }

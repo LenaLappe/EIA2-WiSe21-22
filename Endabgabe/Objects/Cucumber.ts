@@ -1,18 +1,19 @@
 namespace Gemuesegarten {
 
     export class Cucumber extends Vegetable {
-        constructor(_uiField: Fields) {
+        static informationInstance: Cucumber = new Cucumber(null);
+
+        constructor(_uiField: Fields | null) {
             super(_uiField,
                   "cucumber",
-                  400,
-                  0.2,
+                  120000,
+                  1,
                   9,
-                  0.4,
                   5,
-                  10,
-                  10,
-                  10,
-                  10
+                  5,
+                  15,
+                //   10,
+                  3
             );
         }
 

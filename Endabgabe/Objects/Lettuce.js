@@ -3,12 +3,15 @@ var Gemuesegarten;
 (function (Gemuesegarten) {
     class Lettuce extends Gemuesegarten.Vegetable {
         constructor(_uiField) {
-            super(_uiField, "lettuce", 1000, 0.3, 5, 0.09, 1, 10, 10, 10, 10);
+            super(_uiField, "lettuce", 60000, 3, 5, 1, 2, 9, 
+            //   10,
+            2);
         }
         onClick() {
             alert("on click Lettuce");
         }
     }
+    Lettuce.informationInstance = new Lettuce(null);
     Gemuesegarten.Lettuce = Lettuce;
 })(Gemuesegarten || (Gemuesegarten = {}));
 //# sourceMappingURL=Lettuce.js.map

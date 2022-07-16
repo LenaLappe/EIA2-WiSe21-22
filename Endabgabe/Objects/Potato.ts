@@ -1,18 +1,19 @@
 namespace Gemuesegarten {
 
     export class Potato extends Vegetable {
-        constructor(_uiField: Fields) {
+        static informationInstance: Potato = new Potato(null);
+
+        constructor(_uiField: Fields | null) {
             super(_uiField,
                   "potato",
-                  9000,
-                  0.5,
+                  10000,
+                  1,
+                  3,
+                  1, 
+                  2,
                   10,
-                  0.05,
-                  5, 
-                  10,
-                  10,
-                  10,
-                  10
+                //   10,
+                  4
             );
         }
 

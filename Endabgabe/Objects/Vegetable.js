@@ -8,50 +8,100 @@ var Gemuesegarten;
         Status[Status["Dying"] = 2] = "Dying";
     })(Status = Gemuesegarten.Status || (Gemuesegarten.Status = {}));
     class Vegetable {
-        constructor(_uiField, _growthStatus2, _growthTime, _fertilize, _fertilizePrice, _water, _waterPrice, _price, _income, _damage, _health) {
-            this.uiField = _uiField;
+        constructor(_uiField, _growthStatus2, _growthTime, _fertilize, _fertilizePrice, _water, _price, _income, _health) {
+            this.water = 0;
+            this.fertilize = 0;
             this.growthStatus2 = _growthStatus2;
             this.growthTime = _growthTime;
-            this.fertilize = _fertilize;
+            this.neededFertilize = _fertilize;
             this.fertilizePrice = _fertilizePrice;
-            this.water = _water;
-            this.waterPrice = _waterPrice;
+            this.neededWater = _water;
             this.plantPrice = _price;
             this.income = _income;
-            this.damage = _damage;
-            this.health = _health;
+            // this.damage = _damage;
+            this.healPrice = _health;
             this.growthStatus1 = "plant";
             this.damageStatus = "dead";
+            this.bugStatus = "bugs";
             this.status = Status.Seedling;
-            this.handleGrowth();
+            if (_uiField != null) {
+                this.uiField = _uiField;
+                this.handleGrowth();
+                let bugPosibleCount = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                console.log("Bug posible count = " + bugPosibleCount);
+                for (let i = 0; i < bugPosibleCount; i++) {
+                    let getRandomNumber = Math.floor(Math.random() * (this.growthTime - 1 + 1)) + 1;
+                    console.log("getrandomNumber = " + getRandomNumber);
+                    setTimeout(this.handleBug, getRandomNumber, this);
+                }
+            }
+        }
+        getPlantPrice() {
+            return Math.round(this.plantPrice * Gemuesegarten.Wallet.instance.inflationRatio);
+        }
+        getIncome() {
+            return Math.round(this.income * Gemuesegarten.Wallet.instance.inflationRatio);
+        }
+        getFertilizePrice() {
+            return Math.round(this.fertilizePrice * Gemuesegarten.Wallet.instance.inflationRatio);
+        }
+        getHealPrice() {
+            return Math.round(this.healPrice * Gemuesegarten.Wallet.instance.inflationRatio);
         }
         onClick() {
-            alert("on click vegetable");
+            console.log("hello, vegetable");
+        }
+        plantSeedlings() {
+            Gemuesegarten.Wallet.instance.handleSeedlingsMoney(this);
         }
         // https://stackoverflow.com/questions/44642223/need-help-finding-the-time-left-on-a-settimeout-function-being-used-to-continuou    
         handleGrowth() {
-            this.timeoutHandle = setTimeout(this.growNow, this.growthTime, this);
-            this.timeoutStart = Date.now();
+            setTimeout(this.growNow, this.growthTime, this);
         }
         handleWater() {
-            this.changeGrowTimeout(this.water);
+            this.water++;
         }
         handleFertilize() {
-            this.changeGrowTimeout(this.fertilize);
-        }
-        changeGrowTimeout(percentSpeedup) {
-            const remainingTime = this.growthTime - (Date.now() - this.timeoutStart);
-            clearTimeout(this.timeoutHandle);
-            console.log(remainingTime * (1 - percentSpeedup));
-            this.timeoutHandle = setTimeout(this.growNow, remainingTime * (1 - percentSpeedup), this);
-            this.timeoutStart = Date.now();
+            this.fertilize++;
+            Gemuesegarten.Wallet.instance.handleFertilizeMoney(this);
         }
         growNow(self) {
-            self.status = Status.Plant;
+            if (self.water == self.neededWater && self.fertilize == self.neededFertilize) {
+                self.status = Status.Plant;
+                console.log("hei");
+                console.log(self.water);
+                console.log(self.neededWater);
+            }
+            else {
+                self.status = Status.Dying;
+                self.hasBug = false;
+                console.log("fisch");
+                setTimeout(self.removeVegetable, 2000, self);
+            }
             self.uiField.refreshUI();
         }
         handleHarvest() {
-            this.uiField.recentVegetable = null;
+            this.removeVegetable(this);
+            Gemuesegarten.Wallet.instance.handleHarvestMoney(this);
+        }
+        removeVegetable(self) {
+            self.uiField.recentVegetable = null;
+            self.uiField.refreshUI();
+        }
+        handleBug(self) {
+            let minProbability = 1;
+            let maxProbability = 100;
+            let randomNumber;
+            randomNumber = Math.floor(Math.random() * (maxProbability - minProbability + 1)) + minProbability;
+            if (randomNumber > 60) {
+                self.hasBug = true;
+                console.log("Ich bin ein Bug");
+                self.uiField.refreshUI();
+            }
+        }
+        handleHeal() {
+            this.hasBug = false;
+            Gemuesegarten.Wallet.instance.handleHealMoney(this);
             this.uiField.refreshUI();
         }
     }
