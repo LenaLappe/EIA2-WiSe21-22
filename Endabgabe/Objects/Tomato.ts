@@ -11,15 +11,10 @@ namespace Gemuesegarten {
                   7,
                   3,
                   4,
-                  13,
-                //   10,
+                  19,
                   5
             );
         }
 
-        onClick(): void {
-
-        alert("on click Tomato");
-        }
     }
 }

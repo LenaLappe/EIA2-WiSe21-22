@@ -18,25 +18,32 @@ var Gemuesegarten;
             this.neededWater = _water;
             this.plantPrice = _price;
             this.income = _income;
-            // this.damage = _damage;
             this.healPrice = _health;
             this.growthStatus1 = "plant";
             this.damageStatus = "dead";
             this.bugStatus = "bugs";
             this.status = Status.Seedling;
+            // wenn Feld bepflanzt ist und dementsprechend nicht null
             if (_uiField != null) {
                 this.uiField = _uiField;
                 this.handleGrowth();
-                let bugPosibleCount = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
-                console.log("Bug posible count = " + bugPosibleCount);
+                // Gibt ne random number zw. 1 und 5
+                let bugPosibleCount = this.randomIntFromInterval(1, 5);
+                // gehen 5 mal die Shleife durch und lassen uns eine random Zahl innerhalb der growth time ausgeben
                 for (let i = 0; i < bugPosibleCount; i++) {
-                    let getRandomNumber = Math.floor(Math.random() * (this.growthTime - 1 + 1)) + 1;
-                    console.log("getrandomNumber = " + getRandomNumber);
+                    let getRandomNumber = this.randomIntFromInterval(1, this.growthTime);
+                    // setzen die random zahl der growth time, damit der bug random in der Growth time kommt
                     setTimeout(this.handleBug, getRandomNumber, this);
                 }
             }
         }
+        // https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript/7228322#7228322
+        randomIntFromInterval(min, max) {
+            // wir bekommen eine random Zahl zwischen der maximalen und minimalen Zahl
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
         getPlantPrice() {
+            // gibt den Wert zurück auf den die Inflatio gerechnet wurde 
             return Math.round(this.plantPrice * Gemuesegarten.Wallet.instance.inflationRatio);
         }
         getIncome() {
@@ -47,9 +54,6 @@ var Gemuesegarten;
         }
         getHealPrice() {
             return Math.round(this.healPrice * Gemuesegarten.Wallet.instance.inflationRatio);
-        }
-        onClick() {
-            console.log("hello, vegetable");
         }
         plantSeedlings() {
             Gemuesegarten.Wallet.instance.handleSeedlingsMoney(this);
@@ -66,16 +70,16 @@ var Gemuesegarten;
             Gemuesegarten.Wallet.instance.handleFertilizeMoney(this);
         }
         growNow(self) {
+            // wenn genug Wasser und genug Fertilizer, dann ist die Pflanze gesund gewachsen
             if (self.water == self.neededWater && self.fertilize == self.neededFertilize) {
                 self.status = Status.Plant;
-                console.log("hei");
-                console.log(self.water);
-                console.log(self.neededWater);
             }
+            // wenn die Bedinungen nicht erfüllt sind, dann stirbt sie
             else {
                 self.status = Status.Dying;
+                // wenn wir bug nicht auf false setzen wird Bug Icon sonst immer angezeigt
                 self.hasBug = false;
-                console.log("fisch");
+                // nach 2 Sekunden wird removeVegetable aufgerufen, sonst würde man nie das sterben icon sehen
                 setTimeout(self.removeVegetable, 2000, self);
             }
             self.uiField.refreshUI();
@@ -91,11 +95,11 @@ var Gemuesegarten;
         handleBug(self) {
             let minProbability = 1;
             let maxProbability = 100;
-            let randomNumber;
-            randomNumber = Math.floor(Math.random() * (maxProbability - minProbability + 1)) + minProbability;
-            if (randomNumber > 60) {
+            // zufallszahl ob der Bug auftritt
+            let randomNumber = self.randomIntFromInterval(minProbability, maxProbability);
+            // wahrscheinlichkeit von 40% das der Bug auftritt
+            if (randomNumber >= 60) {
                 self.hasBug = true;
-                console.log("Ich bin ein Bug");
                 self.uiField.refreshUI();
             }
         }

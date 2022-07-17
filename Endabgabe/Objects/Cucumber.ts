@@ -11,15 +11,9 @@ namespace Gemuesegarten {
                   9,
                   5,
                   5,
-                  15,
-                //   10,
+                  25,
                   3
             );
-        }
-
-        onClick(): void {
-
-        alert("on click Cucumber");
         }
 
     }

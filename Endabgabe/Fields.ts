@@ -3,17 +3,19 @@ namespace Gemuesegarten {
     export class Fields {
 
         gameDiv: HTMLDivElement;
+        // es kann auch kein Vegetable gepflanzt sein, dementsprechend auch null sein
         recentVegetable: Vegetable|null;
         infoContainer: HTMLDivElement;
 
-        constructor(gameDivGiven: HTMLDivElement) {
-            this.gameDiv = gameDivGiven;
+        constructor(_gameDiv: HTMLDivElement) {
+            this.gameDiv = _gameDiv;
         }
 
 
 
         onClick(): void {
             // wird durch timeOut function aufgerufen (DOM), somit ist "this" nicht mehr das gleiche "this"
+            //definieren hier schon weil wir von hier timeout aufrufen und der braucht "self" statt "this"
             let self: Fields = this;
 
             let plantActionButtons: HTMLDivElement = document.querySelector(".plantActionButtons")!;
@@ -23,6 +25,7 @@ namespace Gemuesegarten {
             vegetableButtons.innerHTML = "";
 
 
+            // wenn bis jetzt noch kein Vegteable im Feld gepflanzt ist
             if (this.recentVegetable == null) {
 
                 let tomatoButton: HTMLButtonElement;
@@ -43,6 +46,7 @@ namespace Gemuesegarten {
                 tomatoButton = document.createElement("button");
                 tomatoButton.classList.add("tomatoBtn");
                 tomatoDiv = document.createElement("div");
+                // von Tomate.InformationInstance, welche wiederum auf die Class Vegetable zugreifen kann und dardurch die Funktion in Vegetable aufrufen kann
                 tomatoDiv.innerHTML = Tomato.informationInstance.getPlantPrice() + " €";
         
                 potatoButton = document.createElement("button");
@@ -77,7 +81,7 @@ namespace Gemuesegarten {
                 carrotsButton.appendChild(carrotsDiv);
                 cucumberButton.appendChild(cucumberDiv);
 
-
+                // anonyme Funktion, hat kein eigenenes "this" und erbt somit eigentlich das "this" vom DOM, was wir hier aber nicht wollen
                 tomatoButton.addEventListener("click", function (): void { 
                     self.recentVegetable = new Tomato(self);
                     self.recentVegetable.plantSeedlings();
@@ -101,13 +105,14 @@ namespace Gemuesegarten {
                 cucumberButton.addEventListener("click", function (): void { 
                     self.recentVegetable = new Cucumber(self);
                     self.recentVegetable.plantSeedlings();
-                    console.log("schon wieder ne Gurke");
                     self.buttonRefreshUI(); 
                 });
 
 
             }
 
+            // wenn schon ein Vegetable im Feld ist
+            // wissen das Vegetable hier nie null sein kann, weil oben in if schon geprüft
             else {
                 let waterPlantButton: HTMLButtonElement;
                 let fertilizePlantButton: HTMLButtonElement;
@@ -123,12 +128,18 @@ namespace Gemuesegarten {
                 fertilizePlantButton.classList.add("fertilizePlantBtn");
                 fertilizePlantButton.innerHTML = "fertilize: " + this.recentVegetable.getFertilizePrice() + " €";
 
+                plantActionButtons.appendChild(waterPlantButton);
+                plantActionButtons.appendChild(fertilizePlantButton);
+
                 if (this.recentVegetable!.status == Status.Plant) {
                     harvestPlantButton = document.createElement("button");
                     harvestPlantButton.classList.add("harvestPlantBtn");
                     harvestPlantButton.innerHTML = "harvest: " + this.recentVegetable.getIncome() + " €";
 
                     plantActionButtons.appendChild(harvestPlantButton);
+
+                    plantActionButtons.removeChild(waterPlantButton);
+                    plantActionButtons.removeChild(fertilizePlantButton);
 
                     harvestPlantButton.addEventListener("click", function (): void { 
                         self.recentVegetable!.handleHarvest();
@@ -139,7 +150,7 @@ namespace Gemuesegarten {
                 else if (this.recentVegetable!.hasBug) {
                     healPlantButton = document.createElement("button");
                     healPlantButton.classList.add("healPlantBtn");
-                    healPlantButton.innerHTML = "heal: " + this.recentVegetable.getHealPrice() + " €";
+                    healPlantButton.innerHTML = "heal:<br /> " + this.recentVegetable.getHealPrice() + " €";
 
                     plantActionButtons.appendChild(healPlantButton);
 
@@ -149,8 +160,6 @@ namespace Gemuesegarten {
                      });
                 }
 
-                plantActionButtons.appendChild(waterPlantButton);
-                plantActionButtons.appendChild(fertilizePlantButton);
 
 
 
@@ -166,20 +175,6 @@ namespace Gemuesegarten {
 
             }
         }
-
-        // vegetableCharacteristics(recentVegetable: Vegetable): void {
-        //     this.infoContainer = document.querySelector(".infoOfVegetables")!;
-    
-        //     let characteristics: string = "";
-        //     characteristics += "<img src=\"" + recentVegetable.growthStatus2  + ".png" + ">";
-        //     characteristics += "<br>";
-        //     characteristics += "Need of water: " + recentVegetable.neededWater;
-        //     characteristics += "<br>";
-        //     characteristics += "Fertilize: " + recentVegetable.neededFertilize;
-    
-        //     this.infoContainer.innerHTML = characteristics;
-        // }
-
 
         buttonRefreshUI(): void {
             let vegetableButtons: HTMLDivElement;
@@ -203,7 +198,6 @@ namespace Gemuesegarten {
             
 
             // https://stackoverflow.com/questions/18665702/javascript-setting-background-image-of-a-div-via-a-function-and-function-paramet
-
             if (this.recentVegetable != null) {
 
                 if (this.recentVegetable!.hasBug) {
@@ -225,7 +219,7 @@ namespace Gemuesegarten {
 
 
                 
-                
+                // https://stackoverflow.com/questions/54487585/display-text-on-hover-item-with-javascript/54487692#54487692
                 this.gameDiv.title = this.recentVegetable.growthStatus2 + ": " + "needed water: " + this.recentVegetable.water + " / " + this.recentVegetable.neededWater + "  & " +  " needed fertilize: " + this.recentVegetable.fertilize + " / " + this.recentVegetable.neededFertilize;
 
             }
