@@ -47,27 +47,27 @@ namespace Gemuesegarten {
                 tomatoButton.classList.add("tomatoBtn");
                 tomatoDiv = document.createElement("div");
                 // von Tomate.InformationInstance, welche wiederum auf die Class Vegetable zugreifen kann und dardurch die Funktion in Vegetable aufrufen kann
-                tomatoDiv.innerHTML = Tomato.informationInstance.getPlantPrice() + " €";
+                tomatoDiv.innerHTML = "-" + Tomato.informationInstance.getPlantPrice() + " €";
         
                 potatoButton = document.createElement("button");
                 potatoButton.classList.add("potatoBtn");
                 potatoDiv = document.createElement("div");
-                potatoDiv.innerHTML = Potato.informationInstance.getPlantPrice() + " €";
+                potatoDiv.innerHTML = "-" + Potato.informationInstance.getPlantPrice() + " €";
         
                 lettuceButton = document.createElement("button");
                 lettuceButton.classList.add("lettuceBtn");
                 lettuceDiv = document.createElement("div");
-                lettuceDiv.innerHTML = Lettuce.informationInstance.getPlantPrice() + " €";
+                lettuceDiv.innerHTML = "-" + Lettuce.informationInstance.getPlantPrice() + " €";
         
                 carrotsButton = document.createElement("button");
                 carrotsButton.classList.add("carrotsBtn");
                 carrotsDiv = document.createElement("div");
-                carrotsDiv.innerHTML = Carrots.informationInstance.getPlantPrice() + " €";
+                carrotsDiv.innerHTML = "-" + Carrots.informationInstance.getPlantPrice() + " €";
         
                 cucumberButton = document.createElement("button");
                 cucumberButton.classList.add("cucumberBtn");
                 cucumberDiv = document.createElement("div");
-                cucumberDiv.innerHTML = Cucumber.informationInstance.getPlantPrice() + " €";
+                cucumberDiv.innerHTML = "-" + Cucumber.informationInstance.getPlantPrice() + " €";
         
                 vegetableButtons.appendChild(tomatoButton);
                 vegetableButtons.appendChild(potatoButton);
@@ -126,7 +126,7 @@ namespace Gemuesegarten {
 
                 fertilizePlantButton = document.createElement("button");
                 fertilizePlantButton.classList.add("fertilizePlantBtn");
-                fertilizePlantButton.innerHTML = "fertilize: " + this.recentVegetable.getFertilizePrice() + " €";
+                fertilizePlantButton.innerHTML = "fertilize: -" + this.recentVegetable.getFertilizePrice() + " €";
 
                 plantActionButtons.appendChild(waterPlantButton);
                 plantActionButtons.appendChild(fertilizePlantButton);
@@ -134,7 +134,7 @@ namespace Gemuesegarten {
                 if (this.recentVegetable!.status == Status.Plant) {
                     harvestPlantButton = document.createElement("button");
                     harvestPlantButton.classList.add("harvestPlantBtn");
-                    harvestPlantButton.innerHTML = "harvest: " + this.recentVegetable.getIncome() + " €";
+                    harvestPlantButton.innerHTML = "harvest: +" + this.recentVegetable.getIncome() + " €";
 
                     plantActionButtons.appendChild(harvestPlantButton);
 
@@ -150,7 +150,7 @@ namespace Gemuesegarten {
                 else if (this.recentVegetable!.hasBug) {
                     healPlantButton = document.createElement("button");
                     healPlantButton.classList.add("healPlantBtn");
-                    healPlantButton.innerHTML = "heal:<br /> " + this.recentVegetable.getHealPrice() + " €";
+                    healPlantButton.innerHTML = "heal:<br /> -" + this.recentVegetable.getHealPrice() + " €";
 
                     plantActionButtons.appendChild(healPlantButton);
 
