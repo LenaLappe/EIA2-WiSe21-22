@@ -18,7 +18,7 @@ namespace Gemuesegarten {
         // WalletContainer befüllen 
         Wallet.instance.refreshWalletUI();
 
-        // nach jedem durchlauf gameContainer leeren, sonst generieren sich immer neue divs
+
         gameContainer.innerHTML = "";
 
         // Spielfeld mit 40 divs erstellen
